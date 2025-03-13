@@ -4,7 +4,7 @@ The repository serves as a template for scaffolding projects with the Resonate C
 
 Install dependencies:
 
-```
+```shell
 uv sync
 ```
 
@@ -12,13 +12,13 @@ Both bar and baz are designed to run as services, each uses `Event().wait()` to 
 
 Run bar:
 
-```
+```shell
 uv run bar
 ```
 
 Run baz:
 
-```
+```shell
 uv run baz
 ```
 
@@ -26,6 +26,6 @@ Foo runs as a script.
 
 Run foo:
 
-```
+```shell
 uv run foo
 ```

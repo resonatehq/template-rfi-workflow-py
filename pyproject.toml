@@ -1,0 +1,36 @@
+[project]
+name = "rfi-workflow-template"
+version = "0.1.0"
+description = "Two step local inocation workflow template"
+authors = [
+    { name = "Resonate HQ", email = "contact@resonatehq.io" }
+]
+dependencies = [
+    "resonate-sdk==0.4.12",
+]
+readme = "README.md"
+requires-python = "== 3.12.*"
+
+[project.scripts]
+    "foo" = "src.foo:main"
+    "bar" = "src.bar:main"
+    "baz" = "src.baz:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+managed = true
+dev-dependencies = [
+    "mypy==1.14.0",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.rye.scripts]
+check-types = "dmypy run --timeout 60 -- src"

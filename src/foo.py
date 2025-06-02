@@ -1,25 +1,19 @@
-from resonate.stores import RemoteStore
-from resonate.task_sources import Poller
-from resonate.targets import poll
 from resonate import Resonate
 
 
-# Initialize Resonate with a RemoteStore and a Poller task source
-resonate = Resonate(
-    store=RemoteStore(url="http://localhost:8001"),
-    task_source=Poller(url="http://localhost:8002"),
-)
+# Initialize Resonate as the default node group
+resonate = Resonate.remote()
 
 
 # Register foo() with Resonate
 @resonate.register
 def foo(ctx, greeting):
     print("running foo")
-    greeting = yield ctx.rfc("bar", greeting).options(send_to=poll("bar_nodes"))
+    greeting = yield ctx.rfc("bar", greeting).options(target="poll://bar_nodes")
     # to make this call asynchronous
-    # promise = yield ctx.rfi("bar", greeting).options(send_to=poll("bar_nodes"))
+    # promise = yield ctx.rfi("bar", greeting).options(target="poll://bar_nodes")
     # greeting = yield promise
-    greeting = yield ctx.rfc("baz", greeting).options(send_to=poll("baz_nodes"))
+    greeting = yield ctx.rfc("baz", greeting).options(target="poll://baz_nodes")
     return greeting
 
 

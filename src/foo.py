@@ -9,11 +9,11 @@ resonate = Resonate.remote()
 @resonate.register
 def foo(ctx, greeting):
     print("running foo")
-    greeting = yield ctx.rfc("bar", greeting).options(target="poll://bar_nodes")
+    greeting = yield ctx.rpc("bar", greeting).options(target="poll://bar_nodes")
     # to make this call asynchronous
     # promise = yield ctx.rfi("bar", greeting).options(target="poll://bar_nodes")
     # greeting = yield promise
-    greeting = yield ctx.rfc("baz", greeting).options(target="poll://baz_nodes")
+    greeting = yield ctx.rpc("baz", greeting).options(target="poll://baz_nodes")
     return greeting
 
 
@@ -21,7 +21,7 @@ def foo(ctx, greeting):
 def main():
     try:
         # Invoke foo()
-        handle = foo.run(id="hello-world-greeting", greeting="hello")
+        handle = foo.begin_run(id="hello-world-greeting", greeting="hello")
         # Print the result of foo()
         # handle.result() is a blocking call
         print(handle.result())

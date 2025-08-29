@@ -5,7 +5,7 @@ The repository serves as a template for scaffolding projects with the Resonate C
 Install dependencies:
 
 ```shell
-uv sync
+uv sync --upgrade
 ```
 
 Both bar and baz are designed to run as services, each uses `Event().wait()` to stay running.

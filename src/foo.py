@@ -9,11 +9,11 @@ resonate = Resonate.remote()
 @resonate.register
 def foo(ctx, greeting):
     print("running foo")
-    greeting = yield ctx.rpc("bar", greeting).options(target="poll://bar_nodes")
+    greeting = yield ctx.rpc("bar", greeting).options(target="poll://any@bar_nodes")
     # to make this call asynchronous
-    # promise = yield ctx.rfi("bar", greeting).options(target="poll://bar_nodes")
+    # promise = yield ctx.rfi("bar", greeting).options(target="poll://any@bar_nodes")
     # greeting = yield promise
-    greeting = yield ctx.rpc("baz", greeting).options(target="poll://baz_nodes")
+    greeting = yield ctx.rpc("baz", greeting).options(target="poll://any@baz_nodes")
     return greeting
 
 
